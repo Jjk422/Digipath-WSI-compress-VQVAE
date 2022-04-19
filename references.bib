@@ -1,0 +1,270 @@
+
+@inproceedings{kwon_appropriate_2020,
+	title = {Appropriate {Evaluation} of {Diagnostic} {Utility} of {Machine} {Learning} {Algorithm} {Generated} {Images}},
+	url = {https://proceedings.mlr.press/v136/kwon20a.html},
+	abstract = {Generative machine learning (ML) methods can reduce time, cost, and radiation associated with medical image acquisition, compression, or generation techniques. While quantitative metrics are commonly used in the evaluation of ML generated images, it is unknown how well these quantitative metrics relate to the diagnostic utility of images. Here, fellowship-trained radiologists provided diagnoses and qualitative evaluations on chest radiographs reconstructed from the current standard JPEG2000 or variational autoencoder (VAE) techniques. Cohen’s kappa coefficient measured the agreement of diagnoses based on different reconstructions. Methods that produced similar Fréchet inception distance (FID) showed similar diagnostic performances. Thus in place of time-intensive expert radiologist verification, an appropriate target FID – an objective quantitative metric – can evaluate the clinical utility of ML generated medical images.},
+	language = {en},
+	urldate = {2022-04-14},
+	booktitle = {Proceedings of the {Machine} {Learning} for {Health} {NeurIPS} {Workshop}},
+	publisher = {PMLR},
+	author = {Kwon, Young Joon and Toussie, Danielle and Azour, Lea and Concepcion, Jose and Eber, Corey and Reina, G. Anthony and Tang, Ping Tak Peter and Doshi, Amish H. and Oermann, Eric K. and Costa, Anthony B.},
+	month = nov,
+	year = {2020},
+	note = {ISSN: 2640-3498},
+	pages = {179--193},
+}
+
+@article{durbin_letter_1975,
+	title = {Letter: {Acid} secretion by gastric mucous membrane},
+	volume = {229},
+	issn = {0002-9513},
+	shorttitle = {Letter},
+	doi = {10.1152/ajplegacy.1975.229.6.1726},
+	language = {eng},
+	number = {6},
+	journal = {The American Journal of Physiology},
+	author = {Durbin, R. P.},
+	month = dec,
+	year = {1975},
+	pmid = {2020},
+	keywords = {Animals, Gastric Juice, Gastric Mucosa, Hydrogen-Ion Concentration, Methods},
+	pages = {1726},
+}
+
+@article{akamatsu_increase_1975,
+	title = {Increase in acetyl {CoA} synthetase activity after phenobarbital treatment},
+	volume = {24},
+	issn = {0006-2952},
+	doi = {10.1016/0006-2952(75)90013-1},
+	language = {eng},
+	number = {18},
+	journal = {Biochemical Pharmacology},
+	author = {Akamatsu, N. and Nakajima, H. and Ono, M. and Miura, Y.},
+	month = sep,
+	year = {1975},
+	pmid = {15},
+	keywords = {Acetate-CoA Ligase, Acetylesterase, Acetylglucosamine, Animals, Coenzyme A Ligases, Cycloheximide, Glucosamine, Glutamine-Fructose-6-Phosphate Transaminase (Isomerizing), Liver, Male, Phenobarbital, Phosphotransferases, Proteins, Rats, Stimulation, Chemical},
+	pages = {1725--1727},
+}
+
+@article{durbin_letter_1975-1,
+	title = {Letter: {Acid} secretion by gastric mucous membrane},
+	volume = {229},
+	issn = {0002-9513},
+	shorttitle = {Letter},
+	doi = {10.1152/ajplegacy.1975.229.6.1726},
+	language = {eng},
+	number = {6},
+	journal = {The American Journal of Physiology},
+	author = {Durbin, R. P.},
+	month = dec,
+	year = {1975},
+	pmid = {2020},
+	keywords = {Animals, Gastric Juice, Gastric Mucosa, Hydrogen-Ion Concentration, Methods},
+	pages = {1726},
+}
+
+@article{akamatsu_increase_1975-1,
+	title = {Increase in acetyl {CoA} synthetase activity after phenobarbital treatment},
+	volume = {24},
+	issn = {0006-2952},
+	doi = {10.1016/0006-2952(75)90013-1},
+	language = {eng},
+	number = {18},
+	journal = {Biochemical Pharmacology},
+	author = {Akamatsu, N. and Nakajima, H. and Ono, M. and Miura, Y.},
+	month = sep,
+	year = {1975},
+	pmid = {15},
+	keywords = {Acetate-CoA Ligase, Acetylesterase, Acetylglucosamine, Animals, Coenzyme A Ligases, Cycloheximide, Glucosamine, Glutamine-Fructose-6-Phosphate Transaminase (Isomerizing), Liver, Male, Phenobarbital, Phosphotransferases, Proteins, Rats, Stimulation, Chemical},
+	pages = {1725--1727},
+}
+
+@article{fassler_deep_2020,
+	title = {Deep learning-based image analysis methods for brightfield-acquired multiplex immunohistochemistry images},
+	volume = {15},
+	issn = {1746-1596},
+	url = {https://diagnosticpathology.biomedcentral.com/articles/10.1186/s13000-020-01003-0},
+	doi = {10.1186/s13000-020-01003-0},
+	abstract = {Abstract
+            
+              Background
+              Multiplex immunohistochemistry (mIHC) permits the labeling of six or more distinct cell types within a single histologic tissue section. The classification of each cell type requires detection of uniquely colored chromogens localized to cells expressing biomarkers of interest. The most comprehensive and reproducible method to evaluate such slides is to employ digital pathology and image analysis pipelines to whole-slide images (WSIs). Our suite of deep learning tools quantitatively evaluates the expression of six biomarkers in mIHC WSIs. These methods address the current lack of readily available methods to evaluate more than four biomarkers and circumvent the need for specialized instrumentation to spectrally separate different colors. The use case application for our methods is a study that investigates tumor immune interactions in pancreatic ductal adenocarcinoma (PDAC) with a customized mIHC panel.
+            
+            
+              Methods
+              
+                Six different colored chromogens were utilized to label T-cells (CD3, CD4, CD8), B-cells (CD20), macrophages (CD16), and tumor cells (K17) in formalin-fixed paraffin-embedded (FFPE) PDAC tissue sections. We leveraged pathologist annotations to develop complementary deep learning-based methods: (1)
+                ColorAE
+                is a deep autoencoder which segments stained objects based on color; (2)
+                U-Net
+                is a convolutional neural network (CNN) trained to segment cells based on color, texture and shape; and (3) ensemble methods that employ both
+                ColorAE
+                and
+                U-Net
+                , collectively referred to as
+                ColorAE:U-Net
+                . We assessed the performance of our methods using: structural similarity and DICE score to evaluate segmentation results of ColorAE against traditional color deconvolution; F1 score, sensitivity, positive predictive value, and DICE score to evaluate the predictions from ColorAE, U-Net, and ColorAE:U-Net ensemble methods against pathologist-generated ground truth. We then used prediction results for spatial analysis (nearest neighbor).
+              
+            
+            
+              Results
+              We observed that (1) the performance of ColorAE is comparable to traditional color deconvolution for single-stain IHC images (note: traditional color deconvolution cannot be used for mIHC); (2) ColorAE and U-Net are complementary methods that detect six different classes of cells with comparable performance; (3) combinations of ColorAE and U-Net in ensemble methods outperform ColorAE and U-Net alone; and (4) ColorAE:U-Net ensemble methods can be employed for detailed analysis of the tumor microenvironment (TME).
+            
+            
+              Summary
+              We developed a suite of scalable deep learning methods to analyze 6 distinctly labeled cell populations in mIHC WSIs. We evaluated our methods and found that they reliably detected and classified cells in the PDAC tumor microenvironment. We also utilized the ColorAE:U-Net ensemble method to analyze 3 mIHC WSIs with nearest neighbor spatial analysis. We demonstrate a proof of concept that these methods can be employed to quantitatively describe the spatial distribution of immune cells within the tumor microenvironment. These complementary deep learning methods are readily deployable for use in clinical research studies.},
+	language = {en},
+	number = {1},
+	urldate = {2022-04-14},
+	journal = {Diagnostic Pathology},
+	author = {Fassler, Danielle J. and Abousamra, Shahira and Gupta, Rajarsi and Chen, Chao and Zhao, Maozheng and Paredes, David and Batool, Syeda Areeha and Knudsen, Beatrice S. and Escobar-Hoyos, Luisa and Shroyer, Kenneth R. and Samaras, Dimitris and Kurc, Tahsin and Saltz, Joel},
+	month = dec,
+	year = {2020},
+	pages = {100},
+}
+
+@article{chen_quantitative_2020,
+	title = {Quantitative {Assessment} of the {Effects} of {Compression} on {Deep} {Learning} in {Digital} {Pathology} {Image} {Analysis}},
+	issn = {2473-4276},
+	url = {https://ascopubs.org/doi/10.1200/CCI.19.00068},
+	doi = {10.1200/CCI.19.00068},
+	abstract = {PURPOSE
+              Deep learning (DL), a class of approaches involving self-learned discriminative features, is increasingly being applied to digital pathology (DP) images for tasks such as disease identification and segmentation of tissue primitives (eg, nuclei, glands, lymphocytes). One application of DP is in telepathology, which involves digitally transmitting DP slides over the Internet for secondary diagnosis by an expert at a remote location. Unfortunately, the places benefiting most from telepathology often have poor Internet quality, resulting in prohibitive transmission times of DP images. Image compression may help, but the degree to which image compression affects performance of DL algorithms has been largely unexplored.
+            
+            
+              METHODS
+              We investigated the effects of image compression on the performance of DL strategies in the context of 3 representative use cases involving segmentation of nuclei (n = 137), segmentation of lymph node metastasis (n = 380), and lymphocyte detection (n = 100). For each use case, test images at various levels of compression (JPEG compression quality score ranging from 1-100 and JPEG2000 compression peak signal-to-noise ratio ranging from 18-100 dB) were evaluated by a DL classifier. Performance metrics including F1 score and area under the receiver operating characteristic curve were computed at the various compression levels.
+            
+            
+              RESULTS
+              Our results suggest that DP images can be compressed by 85\% while still maintaining the performance of the DL algorithms at 95\% of what is achievable without any compression. Interestingly, the maximum compression level sustainable by DL algorithms is similar to where pathologists also reported difficulties in providing accurate interpretations.
+            
+            
+              CONCLUSION
+              Our findings seem to suggest that in low-resource settings, DP images can be significantly compressed before transmission for DL-based telepathology applications.},
+	language = {en},
+	number = {4},
+	urldate = {2022-04-14},
+	journal = {JCO Clinical Cancer Informatics},
+	author = {Chen, Yijiang and Janowczyk, Andrew and Madabhushi, Anant},
+	month = sep,
+	year = {2020},
+	pages = {221--233},
+}
+
+@article{janowczyk_stain_2017,
+	title = {Stain {Normalization} using {Sparse} {AutoEncoders} ({StaNoSA}): {Application} to digital pathology},
+	volume = {57},
+	issn = {08956111},
+	shorttitle = {Stain {Normalization} using {Sparse} {AutoEncoders} ({StaNoSA})},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0895611116300404},
+	doi = {10.1016/j.compmedimag.2016.05.003},
+	language = {en},
+	urldate = {2022-04-14},
+	journal = {Computerized Medical Imaging and Graphics},
+	author = {Janowczyk, Andrew and Basavanhally, Ajay and Madabhushi, Anant},
+	month = apr,
+	year = {2017},
+	pages = {50--61},
+}
+
+@article{roy_convolutional_2021,
+	title = {Convolutional autoencoder based model {HistoCAE} for segmentation of viable tumor regions in liver whole-slide images},
+	volume = {11},
+	issn = {2045-2322},
+	url = {http://www.nature.com/articles/s41598-020-80610-9},
+	doi = {10.1038/s41598-020-80610-9},
+	abstract = {Abstract
+            Liver cancer is one of the leading causes of cancer deaths in Asia and Africa. It is caused by the Hepatocellular carcinoma (HCC) in almost 90\% of all cases. HCC is a malignant tumor and the most common histological type of the primary liver cancers. The detection and evaluation of viable tumor regions in HCC present an important clinical significance since it is a key step to assess response of chemoradiotherapy and tumor cell proportion in genetic tests. Recent advances in computer vision, digital pathology and microscopy imaging enable automatic histopathology image analysis for cancer diagnosis. In this paper, we present a multi-resolution deep learning model HistoCAE for viable tumor segmentation in whole-slide liver histopathology images. We propose convolutional autoencoder (CAE) based framework with a customized reconstruction loss function for image reconstruction, followed by a classification module to classify each image patch as tumor versus non-tumor. The resulting patch-based prediction results are spatially combined to generate the final segmentation result for each WSI. Additionally, the spatially organized encoded feature map derived from small image patches is used to compress the gigapixel whole-slide images. Our proposed model presents superior performance to other benchmark models with extensive experiments, suggesting its efficacy for viable tumor area segmentation with liver whole-slide images.},
+	language = {en},
+	number = {1},
+	urldate = {2022-04-14},
+	journal = {Scientific Reports},
+	author = {Roy, Mousumi and Kong, Jun and Kashyap, Satyananda and Pastore, Vito Paolo and Wang, Fusheng and Wong, Ken C. L. and Mukherjee, Vandana},
+	month = dec,
+	year = {2021},
+	pages = {139},
+}
+
+@article{ghazvinian_zanjani_impact_2019,
+	title = {Impact of {JPEG} 2000 compression on deep convolutional neural networks for metastatic cancer detection in histopathological images},
+	volume = {6},
+	issn = {2329-4302},
+	url = {https://www.spiedigitallibrary.org/journals/journal-of-medical-imaging/volume-6/issue-02/027501/Impact-of-JPEG-2000-compression-on-deep-convolutional-neural-networks/10.1117/1.JMI.6.2.027501.full},
+	doi = {10.1117/1.JMI.6.2.027501},
+	number = {02},
+	urldate = {2022-04-14},
+	journal = {Journal of Medical Imaging},
+	author = {Ghazvinian Zanjani, Farhad and Zinger, Svitlana and Piepers, Bastian and Mahmoudpour, Saeed and Schelkens, Peter},
+	month = apr,
+	year = {2019},
+	pages = {1},
+}
+
+@article{williams_future-proofing_2017,
+	title = {Future-proofing pathology: the case for clinical adoption of digital pathology},
+	volume = {70},
+	issn = {0021-9746, 1472-4146},
+	shorttitle = {Future-proofing pathology},
+	url = {http://jcp.bmj.com/lookup/doi/10.1136/jclinpath-2017-204644},
+	doi = {10.1136/jclinpath-2017-204644},
+	abstract = {This document clarifies the strategic context of digital pathology adoption, defines the different use cases a healthcare provider may wish to consider as part of a digital adoption and summarises existing reasons for digital adoption and its potential benefits. The reader is provided with references to the relevant literature, and illustrative case studies. The authors hope this report will be of interest to healthcare providers, pathology managers, departmental heads, pathologists and biomedical scientists that are considering digital pathology, deployments or preparing business cases for digital pathology adoption in clinical settings. The information contained in this document can be shared and used in any documentation the reader wishes to present for their own institutional case for adoption report or business case.},
+	language = {en},
+	number = {12},
+	urldate = {2022-04-14},
+	journal = {Journal of Clinical Pathology},
+	author = {Williams, Bethany Jill and Bottoms, David and Treanor, Darren},
+	month = dec,
+	year = {2017},
+	pages = {1010--1018},
+}
+
+@article{williams_future-proofing_2019,
+	title = {Future-proofing pathology part 2: building a business case for digital pathology},
+	volume = {72},
+	issn = {0021-9746, 1472-4146},
+	shorttitle = {Future-proofing pathology part 2},
+	url = {http://jcp.bmj.com/lookup/doi/10.1136/jclinpath-2017-204926},
+	doi = {10.1136/jclinpath-2017-204926},
+	abstract = {Diagnostic histopathology departments are experiencing unprecedented economic and service pressures, and many institutions are now considering digital pathology as part of the solution. In this document, a follow on to our case for adoption report, we provide information and advice to help departments create their own clear, succinct, individualised business case for the clinical deployment of digital pathology.},
+	language = {en},
+	number = {3},
+	urldate = {2022-04-14},
+	journal = {Journal of Clinical Pathology},
+	author = {Williams, Bethany Jill and Bottoms, David and Clark, David and Treanor, Darren},
+	month = mar,
+	year = {2019},
+	pages = {198--205},
+}
+
+@article{xu_stacked_2016,
+	title = {Stacked {Sparse} {Autoencoder} ({SSAE}) for {Nuclei} {Detection} on {Breast} {Cancer} {Histopathology} {Images}},
+	volume = {35},
+	issn = {0278-0062, 1558-254X},
+	url = {http://ieeexplore.ieee.org/document/7163353/},
+	doi = {10.1109/TMI.2015.2458702},
+	number = {1},
+	urldate = {2022-04-14},
+	journal = {IEEE Transactions on Medical Imaging},
+	author = {Xu, Jun and Xiang, Lei and Liu, Qingshan and Gilmore, Hannah and Wu, Jianzhong and Tang, Jinghai and Madabhushi, Anant},
+	month = jan,
+	year = {2016},
+	pages = {119--130},
+}
+
+@article{tellez_neural_2021,
+	title = {Neural {Image} {Compression} for {Gigapixel} {Histopathology} {Image} {Analysis}},
+	volume = {43},
+	issn = {1939-3539},
+	doi = {10.1109/TPAMI.2019.2936841},
+	abstract = {We propose Neural Image Compression (NIC), a two-step method to build convolutional neural networks for gigapixel image analysis solely using weak image-level labels. First, gigapixel images are compressed using a neural network trained in an unsupervised fashion, retaining high-level information while suppressing pixel-level noise. Second, a convolutional neural network (CNN) is trained on these compressed image representations to predict image-level labels, avoiding the need for fine-grained manual annotations. We compared several encoding strategies, namely reconstruction error minimization, contrastive training and adversarial feature learning, and evaluated NIC on a synthetic task and two public histopathology datasets. We found that NIC can exploit visual cues associated with image-level labels successfully, integrating both global and local visual information. Furthermore, we visualized the regions of the input gigapixel images where the CNN attended to, and confirmed that they overlapped with annotations from human experts.},
+	number = {2},
+	journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	author = {Tellez, David and Litjens, Geert and van der Laak, Jeroen and Ciompi, Francesco},
+	month = feb,
+	year = {2021},
+	note = {Conference Name: IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	keywords = {Gigapixel image analysis, Image analysis, Image coding, Image reconstruction, Neural networks, Task analysis, Training, Visualization, computational pathology, convolutional neural networks, representation learning},
+	pages = {567--578},
+}
