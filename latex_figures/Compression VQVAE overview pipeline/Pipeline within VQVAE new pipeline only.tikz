@@ -1,0 +1,51 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=Square] (27) at (3, -1) {Original image};
+		\node [style=Square] (28) at (10, -3) {Patch generation};
+		\node [style=Square] (29) at (18.25, -5) {Hysteresis thresholding};
+		\node [style=Square] (30) at (18.25, -7) {Cell thresholding};
+		\node [style=Square] (31) at (27.5, -9) {VQVAE2 training};
+		\node [style=Square] (32) at (27.5, -11) {VQVAE2 image encoding};
+		\node [style=none] (33) at (3, -3) {};
+		\node [style=none] (36) at (10, -5) {};
+		\node [style=none] (37) at (27.5, -7) {};
+		\node [style=none] (40) at (6, 0) {};
+		\node [style=none] (41) at (14, 0) {};
+		\node [style=none] (42) at (0, 0) {};
+		\node [style=none] (43) at (22.5, 0) {};
+		\node [style=none] (44) at (32.5, 0) {};
+		\node [style=none] (45) at (32.5, -15) {};
+		\node [style=none] (46) at (22.5, -15) {};
+		\node [style=none] (47) at (14, -15) {};
+		\node [style=none] (48) at (6, -15) {};
+		\node [style=none] (49) at (0, -15) {};
+		\node [style=Empty text] (52) at (3, -14) {WSI};
+		\node [style=Empty text] (53) at (10, -14) {Patch creation with tiles};
+		\node [style=Empty text] (54) at (18.25, -14) {Patch selection};
+		\node [style=Empty text] (55) at (27.5, -14) {VQVAE testing and training};
+		\node [style=none] (56) at (27.5, -1) {};
+		\node [style=none] (58) at (3, -9) {\includegraphics[width=2cm]{latex_figures/Compression VQVAE overview pipeline/example WSI slide 2}};
+		\node [style=none] (59) at (10, -9) {\includegraphics{latex_figures/Compression VQVAE overview pipeline/Overview diagram VQVAE patch extraction and algorithm wsi patches only}};
+		\node [style=none] (60) at (18.25, -9.5) {\includegraphics[width=4cm]{latex_figures/Compression VQVAE overview pipeline/Hysteresis example accepted patch.png}};
+		\node [style=none] (61) at (18.25, -12.25) {\includegraphics[width=4cm]{latex_figures/Compression VQVAE overview pipeline/Hysteresis example rejected patch 1.png}};
+		\node [style=Empty text] (62) at (18.25, -8.25) {Accepted};
+		\node [style=Empty text] (64) at (18.25, -11) {Rejected};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (27) to (33.center);
+		\draw (28) to (36.center);
+		\draw (30) to (37.center);
+		\draw [style=arrow] (33.center) to (28);
+		\draw [style=arrow] (36.center) to (29);
+		\draw [style=arrow] (29) to (30);
+		\draw [style=arrow] (31) to (32);
+		\draw [style=dotted] (42.center) to (49.center);
+		\draw [style=dotted] (40.center) to (48.center);
+		\draw [style=dotted] (41.center) to (47.center);
+		\draw [style=dotted] (43.center) to (46.center);
+		\draw [style=dotted] (44.center) to (45.center);
+		\draw [style=red line] (27) to (56.center);
+		\draw [style=red arrow] (56.center) to (31);
+		\draw [style=arrow] (37.center) to (31);
+	\end{pgfonlayer}
+\end{tikzpicture}
