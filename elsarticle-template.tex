@@ -1,12 +1,23 @@
+% Manuscripts for Research articles submitted to The Journal of Pathology Informatics should be divided into the following sections:
+% Title page - This should include the title of the article, as well as the full names, institutional addresses, and e-mail addresses for all authors. Indicate which author will be the corresponding author.
+% Abstract - The abstract should be around 350 words and must be structured containing into separate sections (background, methods, results, conclusions).
+% Background - The context and purpose of the study.
+% Methods - How the study was performed.
+% Results – Report of study findings.
+% Conclusions - Brief summary and potential implications.
+% Competing interests
+% Authors' contributions
+% Acknowledgements
+% References
+% Figure legends (if any)
+% Tables and captions (if any)
+% Description of additional data files (if any)
+
 \documentclass[review]{elsarticle}
 
 \usepackage{lineno,hyperref}
 
-\hypersetup{%
-  colorlinks=true,% hyperlinks will be coloured
-%   linkcolor=green,% hyperlink text will be green
-%   linkbordercolor=red,% hyperlink border will be red
-}
+% \hypersetup{colorlinks,urlcolor=blue}
 
 \modulolinenumbers[5]
 
@@ -14,11 +25,22 @@
 \usepackage{booktabs}
 \usepackage{subcaption}
 
+\usepackage[acronym]{glossaries}
+
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 
 \usepackage{tikzit_setup/tikzit}
 \input{tikzit_setup/tikzit_styles.tikzstyles}
+
+\newacronym{wsi}{WSI}{Whole Slide Image}
+\newacronym{psnr}{PSNR}{Peak Signal to Noise Ratio}
+\newacronym{ssim}{ssim}{Structural Similarity}
+\newacronym{jpeg}{JPEG}{Joint Photographic Experts Group}
+\newacronym{vqvae}{VQVAE}{Vector Quantised Variational Autoencoder}
+\newacronym{vae}{VAE}{Variational Autoencoder}
+\newacronym{cam16}{cam16}{Camelyon 2016}
+\newacronym{ucla}{UCLA}{University of California}
 
 \journal{Journal of Pathology Informatics}
 
@@ -95,17 +117,24 @@
 % \address[mymainaddress]{University of Leeds, Woodhouse Lane, Leeds, West Yorkshire, LS2 9JT, United Kingdom}
 % \address[mysecondaryaddress]{Leeds Teaching Hospitals Trust}
 
+
+% Abstract - The abstract should be around 350 words and must be structured containing into separate sections (background, methods, results, conclusions).
 \begin{abstract}
-Digital pathology whole slide images (WSIs) are large images ($\sim$30 GB/slide uncompressed) of high resolution (0.25 microns per pixel), presenting a significant data storage challenge for hospitals wishing to adopt digital pathology. Lossy compression has been adopted by scanner manufacturers to address this issue - we compare lossy JPEG compression for WSIs and investigate the Vector Quantised Variational AutoEncoder (VQVAE) as a possible alternative to reduce file size while encoding useful features in the compressed representation. \\
-% This paper contains three novel contributions: a comparison of VQVAE compression performance versus standard pathology compression methods (JPEG, JPEG with no metadata and JPEG 2000 with no metadata); demonstration of generalisability and domain shift of the VQVAE network within WSI pathology data and testing of the trained networks on a real-world dataset, to compare performance against existing implementations.
-We trained three VQVAE2 models from \url{https://github.com/rosinality/vq-vae-2-pytorch} on a Camelyon 2016 subset to the compression ratios of $\sim$19.2:1, $\sim$9.2:1 and $\sim$4.8:1 and tested on a Camelyon 2016 subset; a University of California (UCLA) dataset and an internal validation dataset. We then compared compression performance to ImageMagick JPEG and JPEG 2000. \\
-% The PSNR ($PSNR\in R$) for a Camelyon 2016 subset (10 WSI slides) and University of California dataset were 28 dB and 28.75 dB for a compression ratio of $\sim$19.2:1 JPEG compression with metadata. For the VQVAE compression the PSNRs were 19.6±1.77 dB, 20.3±1.09 dB and 21.49±1.83 dB respectively. \\
-% Structural Similarity (SSIM) considers image structure, PSNR does not. SSIM ($SSIM\in[0,1]$) results for the Camelyon 2016 subset and UCLA datasets were 0.35 and 0.35 for JPEG with exif data. The SSIM (mean±standard deviation) for the Camelyon 2016 subset, UCLA dataset and internal validation training dataset was 0.72±0.076, 0.88±0.018 and 0.80±0.060 ($\sim$19.2:1 compression ratio); 0.75±0.067, 0.87±0.023 and 0.81±0.054 ($\sim$9.2:1 compression ratio); 0.32±0.12, 0.52±0.039, 0.39±0.13 ($\sim$4.8:1 compression ratio) for the VQVAE implementation trained on the Camelyon 2016 training data subset (9 WSIs). With JPEG metadata removed from the compression the PSNR and SSIM increased to 30.03±1.34, 32.20±0.89, 30.24±1.31 and 0.88±0.025, 0.87±0.018, 0.84±0.038 for the Camelyon 2016 subset, UCLA dataset and an Internal validation set. JPEG 2000 compression without metadata outperformed all other compression methods with the PSNR and SSIM being 70.55±4.078, 80.04±2.09, 72.86±3.078 and 0.82±0.082, 0.95±0.015, 0.84±0.064 for the Camelyon 2016, UCLA and Internal validation dataset. \\
-JPEG compression outperformed the VQVAE implementation within the Peak Signal to Noise Ratio (PSNR) and Structural Similarity (SSIM) metrics. If the JPEG metadata was not stripped from the compressed file the VQVAE implementation outperformed the JPEG implementation within the SSIM metric.
-% SSIM considers image degradation by comparing similar structures within the image and so is a more accurate representation of the overall image reconstruction quality. This suggests the VQVAE compression displays a systematic reconstruction error, whereas the JPEG implementation displays a random noise error. A stored transform function within the compressed file may be a possible solution to mitigate the VQVAE reconstruction error.
+\paragraph{Background}
+Digital pathology \glspl{wsi} are large images ($\sim$30 GB/slide uncompressed) of high resolution (0.25 microns per pixel), presenting a significant data storage challenge for hospitals wishing to adopt digital pathology. Lossy compression has been adopted by scanner manufacturers to address this issue - we compare lossy \gls{jpeg} compression for \glspl{wsi} and investigate the Vector Quantised Variational AutoEncoder (VQVAE) as a possible alternative to reduce file size while encoding useful features in the compressed representation. \\
+% This paper contains three novel contributions: a comparison of VQVAE compression performance versus standard pathology compression methods (\gls{jpeg}, \gls{jpeg} with no metadata and \gls{jpeg} 2000 with no metadata); demonstration of generalisability and domain shift of the VQVAE network within \gls{wsi} pathology data and testing of the trained networks on a real-world dataset, to compare performance against existing implementations.
+\paragraph{Methods}
+We trained three VQVAE2 models on a Camelyon 2016 subset to the compression ratios of $\sim$19.2:1, $\sim$9.2:1 and $\sim$4.8:1 and tested on a Camelyon 2016 subset; a University of California (UCLA) dataset and an internal validation dataset. We then compared compression performance to ImageMagick \gls{jpeg} and \gls{jpeg} 2000. \\
+\paragraph{Results}
+% The \gls{psnr} ($psnr\in R$) for a Camelyon 2016 subset (10 \gls{wsi} slides) and University of California dataset were 28 dB and 28.75 dB for a compression ratio of $\sim$19.2:1 \gls{jpeg} compression with metadata.
+For the VQVAE compression the \gls{psnr}s were 19.6±1.77 dB, 20.3±1.09 dB and 21.49±1.83 dB respectively. \\
+% Structural Similarity (\gls{ssim}) considers image structure, \gls{psnr} does not. \gls{ssim} ($ssim\in[0,1]$) results for the Camelyon 2016 subset and UCLA datasets were 0.35 and 0.35 for \gls{jpeg} with exif data.
+The \gls{ssim} (mean±standard deviation) for the Camelyon 2016 subset, UCLA dataset and internal validation training dataset was 0.72±0.076, 0.88±0.018 and 0.80±0.060 ($\sim$19.2:1 compression ratio); 0.75±0.067, 0.87±0.023 and 0.81±0.054 ($\sim$9.2:1 compression ratio); 0.32±0.12, 0.52±0.039, 0.39±0.13 ($\sim$4.8:1 compression ratio) for the VQVAE implementation trained on the Camelyon 2016 training data subset (9 \glspl{wsi}). With \gls{jpeg} metadata removed from the compression the \gls{psnr} and \gls{ssim} increased to 30.03±1.34, 32.20±0.89, 30.24±1.31 and 0.88±0.025, 0.87±0.018, 0.84±0.038 for the Camelyon 2016 subset, UCLA dataset and an Internal validation set. \gls{jpeg} 2000 compression without metadata outperformed all other compression methods with the \gls{psnr} and \gls{ssim} being 70.55±4.078, 80.04±2.09, 72.86±3.078 and 0.82±0.082, 0.95±0.015, 0.84±0.064 for the Camelyon 2016, UCLA and Internal validation dataset. \\
+\paragraph{Conclusions}
+\gls{jpeg} compression outperformed the VQVAE implementation within the Peak Signal to Noise Ratio (\gls{psnr}) and Structural Similarity (\gls{ssim}) metrics. If the \gls{jpeg} metadata was not stripped from the compressed file the VQVAE implementation outperformed the \gls{jpeg} implementation within the \gls{ssim} metric.
+% \gls{ssim} considers image degradation by comparing similar structures within the image and so is a more accurate representation of the overall image reconstruction quality. This suggests the VQVAE compression displays a systematic reconstruction error, whereas the \gls{jpeg} implementation displays a random noise error. A stored transform function within the compressed file may be a possible solution to mitigate the VQVAE reconstruction error.
 
 \end{abstract}
-
 \begin{keyword}
  Variational Autoencoder \sep Quantisation \sep Compression \sep Pathology \sep Whole Slide Images \sep Digital Pathology
 \end{keyword}
@@ -114,25 +143,28 @@ JPEG compression outperformed the VQVAE implementation within the Peak Signal to
 
 \linenumbers
 
-\section{Introduction}
-\paragraph{Digital pathology} Digital pathology is a technology to digitise entire glass pathology slides, allowing the diagnosis of cancer on ``whole slide images (WSIs)''. WSIs allow remote diagnosis of digital images on computer workstations, and viewing of slides by multiple pathologists concurrently, greatly increasing the flexibility and efficiency of tissue diagnosis in cancer compared to glass slides [1], [2]. However, due to their very high resolution (0.25 microns per pixel, and typical images are 100,000 x 80,000 pixels), causing challenges in the storage and transmission of WSIs. To reduce file size, image compression such as JPEG 2000 is used by WSI scanners, but lossy compression can lead to a reduction in image quality of images depending on the compression ratio applied. This work seeks to investigate the use of alternative compression methods for digital pathology images using variational autoencoders.
+% Background - The context and purpose of the study.
+\section{Background}
+\subsection{Introduction}
+\paragraph{Digital pathology} Digital pathology is a technology to digitise entire glass pathology slides, allowing the diagnosis of cancer on \gls{wsi}.\glspl{wsi} allow remote diagnosis of digital images on computer workstations, and viewing of slides by multiple pathologists concurrently, greatly increasing the flexibility and efficiency of tissue diagnosis in cancer compared to glass slides [1], [2]. However, due to their very high resolution (0.25 microns per pixel, and typical images are 100,000 x 80,000 pixels), causing challenges in the storage and transmission of \glspl{wsi}. To reduce file size, image compression such as \gls{jpeg} 2000 is used by \gls{wsi} scanners, but lossy compression can lead to a reduction in image quality of images depending on the compression ratio applied. This work seeks to investigate the use of alternative compression methods for digital pathology images using variational autoencoders.
 
-\section{Related work}
+\subsection{Related work}
 \paragraph{Traditional compression techniques}
-In order to enable the scanning of whole slide imaging, lossy compression such as JPEG 2000 is used extensively in digital pathology WSI scanners. Although systems attempt to use compression methods that are visually lossless, the of lossy compression in medical imaging is not without issues due to possible information loss [3]. This information loss can affect the accuracy or consistency of image analysis. Chen et al found that up to 85\% JPEG compression would cause a deviation of deep learning algorithms of 95\% compared to uncompressed results within the Camelyon 2017 dataset [4]. Zanjani et al [3] found similar results, when they trained 3 CNN deep learning algorithms on uncompressed images for nucleus segmentation, lymph node metastasis segmentation, and lymphocyte detection tasks. The trained networks were tested on JPEG 2000 compressed images with compression around 4\% of their original size. The network still performed well on the JPEG 2000 test images [3].
-In evaluating the effect of JPEG compression, metrics such as PSNR (peak signal to noise ratio) and SSIM (structural similarity) can be used to estimate the impact on image quality. SSIM has been stated to be better for image comparison within compression, as it takes into account spatial features, rather than comparing pixel to pixel as with PSNR.
+In order to enable the scanning of \glspl{wsi}, digital pathology scanners use lossy \gls{jpeg} compression. Although systems attempt to use compression methods that are visually lossless, the of lossy compression in medical imaging is not without issues due to possible information loss [3]. This information loss can affect the accuracy or consistency of image analysis. Chen et al found that up to 85\% \gls{jpeg} compression would cause a deviation of deep learning algorithms of 95\% compared to uncompressed results within the Camelyon 2017 dataset [4]. Zanjani et al [3] found similar results, when they trained 3 CNN deep learning algorithms on uncompressed images for nucleus segmentation, lymph node metastasis segmentation, and lymphocyte detection tasks. The trained networks were tested on \gls{jpeg} 2000 compressed images with compression around 4\% of their original size. The network still performed well on the \gls{jpeg} 2000 test images [3].
+In evaluating the effect of \gls{jpeg} compression, metrics such as \gls{psnr} and \gls{ssim} can be used to estimate the impact on image quality. \gls{ssim} has been stated to be better for image comparison within compression, as it takes into account spatial features, rather than comparing pixel to pixel as with \gls{psnr}.
 
-\paragraph{Medical image autoencoder compression} Autoencoders (AE) have been used in many medical image fields. AEs have been used for two main reasons. The first use is in dimensional reduction or compression. The second use is in extraction of feature representations for clustering or classification.
+%%% \paragraph{Medical image autoencoder compression} Autoencoders (AE) have been used in many medical image fields. AEs have been used for two main reasons. The first use is in dimensional reduction or compression. The second use is in extraction of feature representations for clustering or classification.
 
-\paragraph{Medical image deep learning compression} Deep learning algorithms can be used for image compression via the use of encoder-decoder architectures. An encoder can find high level features of an image, and then a decoder can then reconstruct the high-level features back into the original image. More complex encoder-decoder networks can be used. The Encoder can be forced to map the pixels of the input image into a smaller dimensional space, the smaller space representing the high level features of the image. The encoder therefore learns a transformational distribution that converts the pixels to a smaller normally distributed latent feature, $Encoder: X_{ijk} \mapsto Z{m}$ where $X_{ijk} = pixel$; and Z{m} is a vector of size ``m'' with each value representing a normally distributed latent variable. An example of the first Z vector element ($Z{1}\in [-1, 1]$) could represent an image rotation value, with 0 representing 0 degrees and -1 and 1 being a rotation of -180 and 180 degrees respectively.
+%%% \paragraph{Medical image deep learning compression} Deep learning algorithms can be used for image compression via the use of encoder-decoder architectures. An encoder can find high level features of an image, and then a decoder can then reconstruct the high-level features back into the original image. More complex encoder-decoder networks can be used. The Encoder can be forced to map the pixels of the input image into a smaller dimensional space, the smaller space representing the high level features of the image. The encoder therefore learns a transformational distribution that converts the pixels to a smaller normally distributed latent feature, $Encoder: X_{ijk} \mapsto Z{m}$ where $X_{ijk} = pixel$; and Z{m} is a vector of size ``m'' with each value representing a normally distributed latent variable. An example of the first Z vector element ($Z{1}\in [-1, 1]$) could represent an image rotation value, with 0 representing 0 degrees and -1 and 1 being a rotation of -180 and 180 degrees respectively.
 
 \paragraph{Medical image variational autoencoder compression} The compression ability of the variational autoencoder has not been extensively researched to our knowledge, more comprehensive compression research of the autoencoder without stochastic sampling has been done [5], [6], [8]. Variational autoencoders have a large advantage over autoencoder models in real world settings. Autoencoders can only generalise latent vectors to previously seen image features. Variational autoencoders map image features to distributions represented within the latent vectors. Variational autoencoders can traverse the probabilistic latent space generating data with similar latent features, autoencoders randomly assign mappings for unencoded latent space, therefore unseen data will be random for each trained autoencoder model, reducing model reproducability and reliability, the probabilitstic latent space of variational autoencoders does not experience this issue due to their probabilistic nature.
 
-\paragraph{VAE latent space representation compression versus traditional compression techniques} No expansive comparison studies between existing VAE latent space representations and traditional compression methods have been done to our knowledge. Most compression-like papers focus on autoencoders, rather than variational autoencoders.
+%%% \paragraph{VAE latent space representation compression versus traditional compression techniques} No expansive comparison studies between existing VAE latent space representations and traditional compression methods have been done to our knowledge. Most compression-like papers focus on autoencoders, rather than variational autoencoders.
 
 \paragraph{Proposal of the VAE} Autoencoders have some weaknesses, including the inability to deal with previously unseen data. This means that outside the training datasets, the features identified by the encoder are not stable, and may not represent the actual input data. Networks like variational autoencoders can combat this by instead of having a latent space vector of values representing the input, the latent space instead represents a distribution. Each distribution represents an approximate learned latent feature; therefore, each latent vector component can probabilistically approximate the latent features of unseen data.
 This architecture may be able to improve on the shortcomings of autoencoders, while not increasing complexity by an incomprehensible amount.
 
+% Methods - How the study was performed.
 \section{Materials and methods}
 \subsection{Methodology pipeline overview}
 \paragraph{Pipeline stages} Data preparation, training of algorithms and testing of algorithms were the three main stages of the methodology pipeline.
@@ -150,36 +182,38 @@ This architecture may be able to improve on the shortcomings of autoencoders, wh
 \end{figure}
 
 \paragraph{Data preprocessing}
-We extracted tiles (size=(512, 512, 3), overlap=(0, 0, 0)) from the Camelyon 2016 subset dataset, and selected tiles containing tissue samples via hysteresis thresholding.
+We extracted tiles (size=(512, 512, 3), overlap=(12, 12, 0)) from the Camelyon 2016 subset dataset, and selected tiles containing tissue samples via hysteresis thresholding.
 
 \paragraph{VQVAE training}
 We trained a VQVAE at three compression ratios ($\sim$4.8, $\sim$9.8 and $\sim$19.2) on Camelyon 2016 subset thresholded tiles for 500 epochs for each model. We train VQVAE at three compression ratios ($\sim$4.8, $\sim$9.8 and $\sim$19.2) on the thresholded Camelyon 2016 patches for 500 epochs, while using a custom data augmentation method which randomises channels to increase model generalise-ability and transfer-ability.
 
 \paragraph{VQVAE testing}
-We tested the trained VQVAEs on the Camelyon 2016 subset, UCLA and Internal Validation set. We then tested the trained VQVAEs with data augmented training data on the Camelyon 2016 subset, UCLA and Internal Validation set. We then analysed the generated Structural similarity (SSIM) and Peak Signal to Noise Ratio (PSNR) metrics.
+We tested the trained VQVAEs on the Camelyon 2016 subset, UCLA and Internal Validation set. We then tested the trained VQVAEs with data augmented training data on the Camelyon 2016 subset, UCLA and Internal Validation set. We then analysed the generated Structural similarity (\gls{ssim}) and \gls{psnr} metrics.
 
-\paragraph{JPEG compression testing}
-We tested the compression ratios (2 to 97 with intervals of 5) for JPEG and JPEG 2000 compression with and without metadata removed using the --strip function. We then analysed the generated structural similarity (SSIM) and peak signal to noise ratio (PSNR) metrics.
+\paragraph{\gls{jpeg} compression testing}
+We tested the compression ratios (2 to 97 with intervals of 5) for \gls{jpeg} and \gls{jpeg} 2000 compression with and without metadata removed using the --strip function. We then analysed the generated structural similarity (\gls{ssim}) and peak signal to noise ratio (\gls{psnr}) metrics.
 
 \subsection{Datasets}
-\paragraph{Camelyon 2016 subset} Camelyon was created for cancer segmentation and classification tasks on digital pathology whole slide images. Originally presented in the Camelyon challenge. The Camelyon dataset was created for two years, creating the Camelyon 2016 dataset, and the Camelyon 2017 dataset. The Camleyon 2016 dataset is from two hospitals, whereas Camelyon 2017 is from five hospitals. For preliminary experiments on the networks, a subset of the Camelyon 2016 dataset was used, containing Normal slides 1-10 (excluding 9) and Cancerous slides (1-10). These WSIs were converted to smaller patches for network training and testing.
+\paragraph{Camelyon 2016 subset} Camelyon was created for cancer segmentation and classification tasks on digital pathology whole slide images. Originally presented in the Camelyon challenge. The Camelyon dataset was created for two years, creating the Camelyon 2016 dataset, and the Camelyon 2017 dataset. The Camleyon 2016 dataset is from two hospitals, whereas Camelyon 2017 is from five hospitals. For preliminary experiments on the networks, a subset of the Camelyon 2016 dataset was used, containing Normal slides 1-10 (excluding 9) and Cancerous slides (1-10). These \glspl{wsi} were converted to smaller patches for network training and testing.
 
-\paragraph{UCLA} The UCLA dataset (n=21 benign, 21 malignant) is a dataset from the University of California. UCLA consists of WSI slide scans, mainly of breast cancer tissue.
+\paragraph{UCLA} The UCLA dataset (n=21 benign, 21 malignant) is a dataset from the University of California. UCLA consists of \gls{wsi} slide scans, mainly of breast cancer tissue.
 
 \paragraph{Internal validation set} This was a dataset used for internal validation of the algorithms and testing. The internal validation set consisted of 8,455 512x512x3 patches, which after thresholding was applied became 1,935 512x512x3 patches containing tissue. This dataset allows for testing the models on images from real world data, containing image artefacts.
 
 \subsection{Data preprocessing}
-\paragraph{WSI patch extraction} OpenSlide was used to extract patches, these patches were 512x512x3 with an overlap of 0. We then used the Scikit-image hysteresis thresholding implementation to create a hysteresis threshold map. The hysteresis threshold map was then used to measure the amount of tissue within the patch, with any patch that was over 10\% of the slide being tissue being placed into a thresholded patch set for model training.
+\paragraph{\gls{wsi} patch extraction} OpenSlide was used to extract patches, these patches were 512x512x3 with an overlap of 12. We then used the Scikit-image hysteresis thresholding implementation to create a hysteresis threshold map. The hysteresis threshold map was then used to measure the amount of tissue within the patch, with any patch that was over 10\% of the slide being tissue being placed into a thresholded patch set for model training.
 
 \paragraph{Data Augmentation} Data augmentation was used on the training image patches (X) in the form of torchvision.transforms.Compose([torchvision.transforms.Resize((512, 512)), torchvision.transforms.toTensor()]). A custom colour randomising algorithm was also used during VQVAE training, this used Image:$x_{ijk}\mapsto U\sim(0,2) \times (x_{ijk}); k\in \{0,1,2\}$. A normal distribution can be used as an alternate substitute to the Uniform distribution. Randomising a single channel or multiple channels is another alternative.
 
-\paragraph{Data augmentation reasoning} Within preliminary testing the visual reconstructions showed reconstruction of image structures. Camelyon 2016 trained models without data augmentation within preliminary visual testing overfitted to the Camelyon 2016 dataset colour palette. The trained models would not generalise to other scanner datasets, reconstructions contained the correct tissue structure but colour similar to the Camelyon 2016 dataset. Initial testing of uniform or normal single colour channel scale factors produced a range of colours, trained models learnt from increased colour data allowing for greater model generalise-ability on different datasets.
+\paragraph{Data augmentation reasoning} Within preliminary testing the visual reconstructions showed reconstruction of image structures. Camelyon 2016 trained models without data augmentation within preliminary visual testing overfitted to the Camelyon 2016 dataset colour palette. The trained models would not generalise to other scanner datasets, reconstructions contained the correct tissue structure but colour similar to the Camelyon 2016 dataset. Initial testing of uniform or normal single colour channel scale factors produced a range of colours, trained models learnt from increased colour data allowing for greater model generalise-ability on different datasets. We tested whether this visual difference would affect the quantitative performance of the reconstruction of the images from, the compressed representation.
+
 % \begin{figure}
 % \centering
 % \includegraphics[width=0.5\linewidth]{Figures/new_500_dpi_figures/Example VQVAE images reconstructions and data augmentation.png}
 % \caption{Example dataset images with the data augmentation (top row [a]) and the subsequent VQVAE reconstructions for the Camelyon 2016 subset (middle left [b]), UCLA (middle right [c]), cifar 10 (bottom left [d]), cifar 100 (bottom right [e]). The VQVAE was trained on the Camelyon 2016 subset only}
 % \end{figure}
 % Figure 1. a. shows example Camelyon 2016 subset training images with the colour augmentation applied to the training patches. Figure 1. b. shows the same training image batch without image the data augmentation applied and the reconstruction with the Camelyon 2016 trained VQVAE. Figure 1. c. d. e, show the original and reconstructed testing patches for the UCLA, Cifar 10 and Cifar 100 datasets.
+
 \subsection{Algorithms}
 \paragraph{VQVAE architecture} The VQVAE architecture uses an encoder, a decoder and a quantizer. The VQVAE2 modified this with a secondary encoder and decoder layer. The secondary (top) and primary (bottom) encoder and decoder layers encode for high level and low-level features within the image respectively.
 
@@ -230,130 +264,104 @@ The default VQVAE network parameters (in$\_$channel=3, channel=128, n$\_$res$\_$
     % decode: (X^(quant\_t),X^(quant\_b) )→X^' \\
     % VQVAE(X):decode(encode(X))→X^' \\
     
-\paragraph{JPEG} Two ImageMagick JPEG implementations were used: the generic JPEG implementation (``magick {source\_file} -strip -quality {quality} {result\_file}''),
- and the JPEG 2000 compression (``magick {source\_file} \-strip \-colorspace RGB -define jp2:quality {compression\_ratio} {result\_file}''. \\
- All JPEG compression algorithms were run on the same datasets to the VQVAE, using the same Pytorch dataloaders without data augmentation other than “torchvision.transforms.Resize((512, 512))” for all patches within the pathology datasets. \\
- The JPEG compression algorithm compression quality metric was used for every 5\% quality from 2\% to 99\%, this was manually mapped to the compression ratio of the compressed representation. The JPEG 2000 used the same numbers from 2 to 99 but within JPEG 2000 this value represented the desired compression ratio. The PSNR and SSIM values were calculated for all reconstructed images and plotted as a function of the compression ratio for both the JPEG and JPEG 2000 algorithms.
+\paragraph{\gls{jpeg}} Two ImageMagick \gls{jpeg} implementations were used: the generic \gls{jpeg} implementation (``magick {source\_file} -strip -quality {quality} {result\_file}''),
+ and the \gls{jpeg} 2000 compression (``magick {source\_file} \-strip \-colorspace RGB -define jp2:quality {compression\_ratio} {result\_file}''. \\
+ All \gls{jpeg} compression algorithms were run on the same datasets to the VQVAE, using the same Pytorch dataloaders without data augmentation other than “torchvision.transforms.Resize((512, 512))” for all patches within the pathology datasets. \\
+ The \gls{jpeg} compression algorithm compression quality metric was used for every 5\% quality from 2\% to 99\%, this was manually mapped to the compression ratio of the compressed representation. The \gls{jpeg} 2000 used the same numbers from 2 to 99 but within \gls{jpeg} 2000 this value represented the desired compression ratio. The \gls{psnr} and \gls{ssim} values were calculated for all reconstructed images and plotted as a function of the compression ratio for both the \gls{jpeg} and \gls{jpeg} 2000 algorithms.
 
-% \begin{table}[]
-%     \centering
-%     \begin{tabular}{p{0.15\linewidth} p{0.1\linewidth} p{0.1\linewidth} p{0.25\linewidth} p{0.24\linewidth}}
-%     \toprule
-%     \textbf{Algorithm} & \textbf{Has meta data} & \textbf{Test dataset} & \textbf{Peak signal to noise ratio (PSNR)} & \textbf{Structural Similarity (SSIM)} \\
-%     \bottomrule
-%     % & jpeg; meta\\
-%     % \midrule
-%     JPEG & Yes & Cam16 sub & 28 & 0.35 \\
-%     & & UCLA & 28.75 & 0.35 \\
-%     \bottomrule
-    
-%     % & jpeg; no-meta & \\
-%     % \midrule
-%     JPEG & No & Cam16 sub & 30.03±1.34 (29.8867, 30.1733) & 0.88±0.025 (0.8773, 0.8827) \\
-%     & & UCLA & 32.20±0.89 (31.9687, 32.4313) & 0.87±0.018 (0.8653, 0.8747) \\
-%     & & Internal set & 30.24±1.31 (30.1816, 30.2984) & 0.84±0.038 (0.8383, 0.8417) \\
-%     \bottomrule
-    
-%     % & j2000; no-meta & \\
-%     % \begin{tabular}{l l l}
-%     % \midrule
-%     JPEG 2000 & No & Cam16 sub & 70.55±4.078 (70.1140, 70.9860) & 0.82±0.082 (0.8112, 0.8288) \\
-%     & & UCLA & 80.04±2.09 (79.4969, 80.5831) & 0.95±0.015 (0.9461, 0.9539) \\
-%     & & Internal set & 72.86±3.078 (72.7229, 72.9971) & 0.84±0.064 (0.8371, 0.8429) \\
-%     \bottomrule
-%     % \caption{JPEG/JPEG 2000 (CR: $\sim$19) metrics}
-%     \end{tabular}
-%     \caption{JPEG/JPEG 2000 (Compression ratio: $\sim$19.2) metrics. Mean±Standard deviation (t-test: 95\% confidence interval)}
-%     \label{tab:my_label}
-% \end{table}
-
+%%%%% Results – Report of study findings.
 \section{Results}
-\paragraph{Visual differences between JPEG and VQVAE compression} JPEG and JPEG 2000 are current compression techniques used within WSI storage within hospitals. The compression ratio within these stored images is usually around 15:1 to 20:1 compression ratio. The VQVAE trained on a 19.2:1 compression ratio reconstructed images were then visually compared to the decompressed images from the JPEG compression testing. \\
-The reconstructions seemed to be performing better on all datasets compared to the JPEG compression at a similar compression level.
+\paragraph{Visual differences between \gls{jpeg} and \gls{vqvae} compression} \gls{jpeg} and \gls{jpeg} 2000 are current compression techniques used within \gls{wsi} storage within hospitals. The compression ratio within these stored images is usually around 15:1 to 20:1 compression ratio. The \gls{vqvae} trained on a 19.2:1 compression ratio reconstructed images were then visually compared to the decompressed images from the \gls{jpeg} compression testing. \\
+The reconstructions seemed to be performing better on all datasets compared to the \gls{jpeg} compression at a similar compression level.
 
-\paragraph{Custom data augmentation (colour randomisation)}  The custom colour augmented dataset performed worse in all metrics compared to the VQVAE trained without the custom data augmentation. The difference in PSNR (mean [standard deviation]) between the VQVAE trained to the compression ratio of $\sim$19.2 was 1.22 [0.17], -2.2 [0.59], 1.13 [0.42] for the mean and standard deviations of 19.92±1.83, 20.09±1.29, 21.95±1.89 (no colour data augmentation) and 18.70±1.66, 22.29±0.70, 20.82±1.47 (with randomised colour data augmentation) for the Camelyon 2016 subset, UCLA and Internal validation set. The difference in the SSIM for the VQVAE trained to the compression ratio of $\sim$19.2 was 0.11 [-0.024], 0.03 [-0.001], 0.07 [-0.009] from the mean and standard deviation of 0.72±0.076, 0.88±0.018, 0.80±0.060 (no colour data augmentation) and 0.61±0.10, 0.85±0.019, 0.73±0.069 (with randomised colour data augmentation) for the Camelyon 2016 subset, UCLA and Internal validation set respectively. \\
+\paragraph{Custom data augmentation (colour randomisation)}  The custom colour augmented dataset performed worse in all metrics compared to the \gls{vqvae} trained without the custom data augmentation. The difference in \gls{psnr} (mean [standard deviation]) between the \gls{vqvae} trained to the compression ratio of $\sim$19.2 was 1.22 [0.17], -2.2 [0.59], 1.13 [0.42] for the mean and standard deviations of 19.92±1.83, 20.09±1.29, 21.95±1.89 (no colour data augmentation) and 18.70±1.66, 22.29±0.70, 20.82±1.47 (with randomised colour data augmentation) for the Camelyon 2016 subset, UCLA and Internal validation set. The difference in the \gls{ssim} for the \gls{vqvae} trained to the compression ratio of $\sim$19.2 was 0.11 [-0.024], 0.03 [-0.001], 0.07 [-0.009] from the mean and standard deviation of 0.72±0.076, 0.88±0.018, 0.80±0.060 (no colour data augmentation) and 0.61±0.10, 0.85±0.019, 0.73±0.069 (with randomised colour data augmentation) for the Camelyon 2016 subset, UCLA and Internal validation set respectively. \\
 The difference within the median and IQR values for the different algorithms is shown in fig. \ref{fig:image_reconstruction_quality_boxplot_for_all_algorithms}.
 
-\paragraph{JPEG compression quality quantitative results} The peak signal to noise ratio (PSNR) and structural similarity (SSIM) JPEG metrics were calculated for the JPEG compression. The PSNR for JPEG on the tested pathology datasets dropped significantly from 43 to 32 between the 1:1 and 3:1 compression ratios. The PSNR for JPEG maintained stable with a PSNR of around 29 after the 5:1 compression ratio.
+\paragraph{\gls{jpeg} compression quality quantitative results} The peak signal to noise ratio (\gls{psnr}) and structural similarity (\gls{ssim}) \gls{jpeg} metrics were calculated for the \gls{jpeg} compression. The \gls{psnr} for \gls{jpeg} on the tested pathology datasets dropped significantly from 43 to 32 between the 1:1 and 3:1 compression ratios. The \gls{psnr} for \gls{jpeg} maintained stable with a \gls{psnr} of around 29 after the 5:1 compression ratio.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{Figures/new_500_dpi_figures/JPEG ImageMagick compression quality to compression ratio without exif data no title.png}
-% \includegraphics[width=1\linewidth]{Figures/new_500_dpi_figures/JPEG ImageMagick compression quality to compression ratio without exit data.jpeg.jpeg}
-\caption{Imagemagick JPEG/JPEG 2000 quality flag to compression ratio relationship}
+\includegraphics[width=1\linewidth]{Figures/new_500_dpi_figures/jpeg ImageMagick compression quality to compression ratio without exif data no title.png}
+% \includegraphics[width=1\linewidth]{Figures/new_500_dpi_figures/jpeg ImageMagick compression quality to compression ratio without exit data.jpeg.jpeg}
+\caption{Imagemagick \gls{jpeg}/\gls{jpeg} 2000 quality flag to compression ratio relationship}
 \end{figure}
 
-\paragraph{JPEG vs VQVAE (mean and standard deviation)} The PSNR ($PSNR\in R$) mean and standard deviation for the UCLA and Camelyon 2016 subset with metadata were 28 dB and 28.75 dB. The PSNR for the UCLA, Camelyon 2016 subset and internal validation set with exif data stripped with imagemagicks -strip flag were 31.50±0.81 dB, 29.70±1.28 dB, 29.91±1.21 dB for the compression ratio of $\sim$19.2:1 for JPEG compression. For the VQVAE compression the PSNRs mean and standard deviation were 20.3±1.09 dB, 19.6 ± 1.77 dB, 21.49 ± 1.83 dB, respectively. Structural Similarity (SSIM) considers image structure, PSNR does not. SSIM ($SSIM\in [0,1]$) results for the UCLA, Camelyon 2016 subset and internal validation set were 0.35, 0.35 for JPEG with exif data. Without exif data (imagemagick –strip flag) the UCLA, Camelyon 2016 subset and internal validation set SSIM mean and standard deviation was 0.84 ± 0.022, 0.83 ± 0.034, 0.80 ± 0.042 for JPEG and 0.85 ± 0.022, 0.72 ± 0.072, 0.79 ± 0.056 for the VQVAE implementation.
+\paragraph{\gls{jpeg} vs \gls{vqvae} (mean and standard deviation)} The \gls{psnr} ($\gls{psnr}\in R$) mean and standard deviation for the UCLA and Camelyon 2016 subset with metadata were 28 dB and 28.75 dB. The \gls{psnr} for the UCLA, Camelyon 2016 subset and internal validation set with exif data stripped with imagemagicks -strip flag were 31.50±0.81 dB, 29.70±1.28 dB, 29.91±1.21 dB for the compression ratio of $\sim$19.2:1 for \gls{jpeg} compression. For the \gls{vqvae} compression the \gls{psnr}s mean and standard deviation were 20.3±1.09 dB, 19.6 ± 1.77 dB, 21.49 ± 1.83 dB, respectively. Structural Similarity (\gls{ssim}) considers image structure, \gls{psnr} does not. \gls{ssim} ($\gls{ssim}\in [0,1]$) results for the UCLA, Camelyon 2016 subset and internal validation set were 0.35, 0.35 for \gls{jpeg} with exif data. Without exif data (imagemagick –strip flag) the UCLA, Camelyon 2016 subset and internal validation set \gls{ssim} mean and standard deviation was 0.84 ± 0.022, 0.83 ± 0.034, 0.80 ± 0.042 for \gls{jpeg} and 0.85 ± 0.022, 0.72 ± 0.072, 0.79 ± 0.056 for the \gls{vqvae} implementation.
 
-% The PSNR ($PSNR\in R$) for a Camelyon 2016 subset (10 WSI slides) and University of California dataset were 28 dB and 28.75 dB for a compression ratio of $\sim$19.2:1 JPEG compression with metadata. For the VQVAE compression the PSNRs were 19.6±1.77 dB, 20.3±1.09 dB and 21.49±1.83 dB respectively. \\
-% Structural Similarity (SSIM) considers image structure, PSNR does not. SSIM ($SSIM\in[0,1]$) results for the Camelyon 2016 subset and UCLA datasets were 0.35 and 0.35 for JPEG with exif data. The SSIM (mean±standard deviation) for the Camelyon 2016 subset, UCLA dataset and internal validation training dataset was 0.72±0.076, 0.88±0.018 and 0.80±0.060 ($\sim$19.2:1 compression ratio); 0.75±0.067, 0.87±0.023 and 0.81±0.054 ($\sim$9.2:1 compression ratio); 0.32±0.12, 0.52±0.039, 0.39±0.13 ($\sim$4.8:1 compression ratio) for the VQVAE implementation trained on the Camelyon 2016 training data subset (9 WSIs). With JPEG metadata removed from the compression the PSNR and SSIM increased to 30.03±1.34, 32.20±0.89, 30.24±1.31 and 0.88±0.025, 0.87±0.018, 0.84±0.038 for the Camelyon 2016 subset, UCLA dataset and an Internal validation set. JPEG 2000 compression without metadata outperformed all other compression methods with the PSNR and SSIM being 70.55±4.078, 80.04±2.09, 72.86±3.078 and 0.82±0.082, 0.95±0.015, 0.84±0.064 for the Camelyon 2016, UCLA and Internal validation dataset. \\
+% The \gls{psnr} ($\gls{psnr}\in R$) for a Camelyon 2016 subset (10 \gls{wsi} slides) and University of California dataset were 28 dB and 28.75 dB for a compression ratio of $\sim$19.2:1 \gls{jpeg} compression with metadata. For the \gls{vqvae} compression the \gls{psnr}s were 19.6±1.77 dB, 20.3±1.09 dB and 21.49±1.83 dB respectively. \\
+% Structural Similarity (\gls{ssim}) considers image structure, \gls{psnr} does not. \gls{ssim} ($\gls{ssim}\in[0,1]$) results for the Camelyon 2016 subset and UCLA datasets were 0.35 and 0.35 for \gls{jpeg} with exif data. The \gls{ssim} (mean±standard deviation) for the Camelyon 2016 subset, UCLA dataset and internal validation training dataset was 0.72±0.076, 0.88±0.018 and 0.80±0.060 ($\sim$19.2:1 compression ratio); 0.75±0.067, 0.87±0.023 and 0.81±0.054 ($\sim$9.2:1 compression ratio); 0.32±0.12, 0.52±0.039, 0.39±0.13 ($\sim$4.8:1 compression ratio) for the \gls{vqvae} implementation trained on the Camelyon 2016 training data subset (9 \glspl{wsi}). With \gls{jpeg} metadata removed from the compression the \gls{psnr} and \gls{ssim} increased to 30.03±1.34, 32.20±0.89, 30.24±1.31 and 0.88±0.025, 0.87±0.018, 0.84±0.038 for the Camelyon 2016 subset, UCLA dataset and an Internal validation set. \gls{jpeg} 2000 compression without metadata outperformed all other compression methods with the \gls{psnr} and \gls{ssim} being 70.55±4.078, 80.04±2.09, 72.86±3.078 and 0.82±0.082, 0.95±0.015, 0.84±0.064 for the Camelyon 2016, UCLA and Internal validation dataset. \\
 
 % \begin{figure}{\linewidth}
 %     \centering
-%     \includegraphics[width=\linewidth]{Figures/new_500_dpi_figures/VQVAE data augmentation PSNR SSIM comparison boxplot.jpeg}
-%     \caption{Image reconstruction quality boxplot for VQVAE with different colour augmentations.}
+%     \includegraphics[width=\linewidth]{Figures/new_500_dpi_figures/VQVAE data augmentation psnr ssim comparison boxplot.jpeg}
+%     \caption{Image reconstruction quality boxplot for \gls{vqvae} with different colour augmentations.}
 %   \end{figure}
 
 % \begin {figure}
 %   \begin{subfigure}{0.5\linewidth}
 %     \centering
-%     \includegraphics[width=\linewidth]{Figures/new_500_dpi_figures/VQVAE data augmentation PSNR SSIM comparison boxplot.jpeg}
-%     \caption{Image reconstruction quality boxplot for VQVAE with different colour augmentations.}
+%     \includegraphics[width=\linewidth]{Figures/new_500_dpi_figures/VQVAE data augmentation psnr ssim comparison boxplot.jpeg}
+%     \caption{Image reconstruction quality boxplot for \gls{vqvae} with different colour augmentations.}
 %   \end{subfigure}
 %   \begin{subfigure}{0.5\linewidth}
-%     \includegraphics[width=\linewidth]{Figures/new_500_dpi_figures/VQVAE data augmentation PSNR SSIM comparison boxplot With JPEG and JPEG 2000.png}
+%     \includegraphics[width=\linewidth]{Figures/new_500_dpi_figures/VQVAE data augmentation psnr ssim comparison boxplot With jpeg and jpeg 2000.png}
 %     \caption{Image reconstruction quality boxplot for all algorithms}
 %     \label{fig:image_reconstruction_quality_boxplot_for_all_algorithms}
 %   \end{subfigure}
 % \end{figure}
 
-\paragraph{19:1 JPEG vs 19.2:1 VQVAE (medium and interquartile range)} The PSNR medium and interquartile range for the UCLA and Camelyon 2016 subset and internal validation set are $\sim$21, 20, 21 and $\sim$32, 29, 30 for the VQVAE and JPEG respectively.
-The SSIM medium and interquartile range for the UCLA and Camelyon 2016 subset and internal validation set are $\sim$0.85, 0.72, 0.79 and $\sim$0.84, 0.81, 0.8 for the VQVAE and JPEG respectively.
+\paragraph{19:1 \gls{jpeg} vs 19.2:1 \gls{vqvae} (medium and interquartile range)} The \gls{psnr} medium and interquartile range for the UCLA and Camelyon 2016 subset and internal validation set are $\sim$21, 20, 21 and $\sim$32, 29, 30 for the \gls{vqvae} and \gls{jpeg} respectively.
+The \gls{ssim} medium and interquartile range for the UCLA and Camelyon 2016 subset and internal validation set are $\sim$0.85, 0.72, 0.79 and $\sim$0.84, 0.81, 0.8 for the \gls{vqvae} and \gls{jpeg} respectively.
 
 \begin{figure}
-\includegraphics[width=0.9\linewidth]{Figures/new_500_dpi_figures/VQVAE data augmentation PSNR SSIM comparison boxplot With JPEG and JPEG 2000.png}
+\includegraphics[width=0.9\linewidth]{Figures/new_500_dpi_figures/VQVAE data augmentation psnr ssim comparison boxplot With jpeg and jpeg 2000.png}
 \caption{Image reconstruction quality boxplot for all algorithms}
 \label{fig:image_reconstruction_quality_boxplot_for_all_algorithms}
 \end{figure}
- 
+%%%%% Conclusions - Brief summary and potential implications.
+
 \section{Discussion}
-Clinical biopsies require the use of tissue samples that are placed onto glass slides. These glass slides are being digitized as a part of the National Pathology Imaging Co-operative (NPIC) project. The digitization of the whole slide images requires a large amount of digital storage space. Autoencoders and variational autoencoders have been used in other areas within compression. This shows a possible alternative to the current compression methods used within histopathology. Within histopathology, JPEG and JPEG 2000 are used within histopathology scanners, including the Aperio scanner range.
+Clinical biopsies require the use of tissue samples that are placed onto glass slides. These glass slides are being digitized as a part of the National Pathology Imaging Co-operative (NPIC) project. The digitization of the whole slide images requires a large amount of digital storage space. Autoencoders and variational autoencoders have been used in other areas within compression. This shows a possible alternative to the current compression methods used within histopathology. Within histopathology, \gls{jpeg} and \gls{jpeg} 2000 are used within histopathology scanners, including the Aperio scanner range.
 
 % This work focuses on how comparable current variational autoencoders and 
 
-The quantitative metrics for the initial VQVAE testing showed that the VQVAE could perform to a degree that was, on average, either comparable or better than JPEG within the SSIM metric, but worse on the PSNR metric if JPEG metadata is saved. If this is removed the VQVAE SSIM is lower than that of JPEG and JPEG 2000. \\
-The PSNR does not consider structural similarity of the two images, the structural similarity (SSIM) metric does consider the similarity of the structures within the image. 
-VAEs and VQVAEs have been used successfully for compression and meaning representation tasks within other clinical domains, including within x-ray and CT compression [9]. \\
-As the learnt model was able to generalise between different scanners and different datasets from different locations, the latent space was shown to encode features that represented the image features within the image. Future work aims to understand the representations generated by Variational Autoencoder networks, aiming to create clinically useful representations of WSI slides and patches while allowing for compression of the pathology images. 
+The quantitative metrics for the initial \gls{vqvae} testing showed that the \gls{vqvae} could perform to a degree that was, on average, either comparable or better than \gls{jpeg} within the \gls{ssim} metric, but worse on the \gls{psnr} metric if \gls{jpeg} metadata is saved. If this is removed the \gls{vqvae} \gls{ssim} is lower than that of \gls{jpeg} and \gls{jpeg} 2000. \\
+The \gls{psnr} does not consider structural similarity of the two images, the structural similarity (\gls{ssim}) metric does consider the similarity of the structures within the image. 
+VAEs and \gls{vqvae}s have been used successfully for compression and meaning representation tasks within other clinical domains, including within x-ray and CT compression [9]. \\
+As the learnt model was able to generalise between different scanners and different datasets from different locations, the latent space was shown to encode features that represented the image features within the image. Future work aims to understand the representations generated by Variational Autoencoder networks, aiming to create clinically useful representations of \gls{wsi} slides and patches while allowing for compression of the pathology images. 
 
-% The poorer results for the VQVAE2 implementation on the PSNR could have been down to a lack of training of the model. The poorer results for the VQVAE implementation versus the JPEG implementations could also have been due to the use of suboptimal training hyper parameters, or possibly the use of a loss function that did not focus on the image reconstruction quality with appropriate metrics (PSNR or SSIM rather than MSE).
-% % , with the latent space embedding representations being favoured or balanced over the reconstruction accuracy metrics of PSNR or SSIM.
-% % A full hyperparameter search for the VQVAE network was not performed to gain the optimal parameters for the network compression.
-% % More WSI slides could have been used for training and testing of the data, using multiple datasets should mitigate the generalisability of this issue. As the metrics were done on a per patch basis, this may not be fully transferable to a whole slide image compression metric, further research would have to be done to confirm this.
+% The poorer results for the \gls{vqvae} implementation on the \gls{psnr} could have been down to a lack of training of the model. The poorer results for the \gls{vqvae} implementation versus the \gls{jpeg} implementations could also have been due to the use of suboptimal training hyper parameters, or possibly the use of a loss function that did not focus on the image reconstruction quality with appropriate metrics (\gls{psnr} or \gls{ssim} rather than MSE).
+% % , with the latent space embedding representations being favoured or balanced over the reconstruction accuracy metrics of \gls{psnr} or \gls{ssim}.
+% % A full hyperparameter search for the \gls{vqvae} network was not performed to gain the optimal parameters for the network compression.
+% % More \gls{wsi} slides could have been used for training and testing of the data, using multiple datasets should mitigate the generalisability of this issue. As the metrics were done on a per patch basis, this may not be fully transferable to a whole slide image compression metric, further research would have to be done to confirm this.
 
 
-% The JPEG and JPEG 2000 implementations optimise towards an SSIM or PSNR value, whereas the loss function for the trained VQVAE was focussed on embedding similarity towards the normal distribution sample with reconstruction loss being in the form of the MSE. 
+% The \gls{jpeg} and \gls{jpeg} 2000 implementations optimise towards an \gls{ssim} or \gls{psnr} value, whereas the loss function for the trained \gls{vqvae} was focussed on embedding similarity towards the normal distribution sample with reconstruction loss being in the form of the MSE. 
 
-% were focussed on a euclidian difference between the embeddings and the normal distribution sample, as well as the MSE loss. Therefore it may be possible to optimse the VQVAE towards attaining a good SSIM value by encorporating this within the loss function itself.
+% were focussed on a euclidian difference between the embeddings and the normal distribution sample, as well as the MSE loss. Therefore it may be possible to optimse the \gls{vqvae} towards attaining a good \gls{ssim} value by encorporating this within the loss function itself.
 
 \paragraph{Limitations} The tested variational autoencoder networks may have been mapping too much towards the reconstructed image, rather than ensuring mapping to the normal distribution feature representations, therefore ignoring the normal distribution feature mapping in favour of minimizing the reconstruction image accuracy, latent space testing and visualisation is aimed to be done in the future. \\
-The poorer results for the VQVAE2 implementation on the PSNR could have been down to a lack of training of the model (epochs=500), however training new models on 2000 epochs did not change the results significantly. The poorer results for the VQVAE implementation versus the JPEG implementations could also have been due to the use of suboptimal training hyper parameters, or possibly the use of a loss function that did not focus on the image reconstruction quality, with the latent space embedding representations being favoured or balanced over the reconstruction accuracy metrics of PSNR or SSIM. \\
-A full hyperparameter search for the VQVAE network was not performed to gain the optimal parameters for the network compression. \\
-More WSI slides could have been used for training and testing of the data, using multiple datasets should mitigate the generalisability of this issue. As the metrics were done on a per patch basis, this may not be fully transferable to a whole slide image compression metric, further research would have to be done to confirm this.
+The poorer results for the \gls{vqvae} implementation on the \gls{psnr} could have been down to a lack of training of the model (epochs=500), however training new models on 2000 epochs did not change the results significantly. The poorer results for the \gls{vqvae} implementation versus the \gls{jpeg} implementations could also have been due to the use of suboptimal training hyper parameters, or possibly the use of a loss function that did not focus on the image reconstruction quality, with the latent space embedding representations being favoured or balanced over the reconstruction accuracy metrics of \gls{psnr} or \gls{ssim}. \\
+A full hyperparameter search for the \gls{vqvae} network was not performed to gain the optimal parameters for the network compression. \\
+More \gls{wsi} slides could have been used for training and testing of the data, using multiple datasets should mitigate the generalisability of this issue. As the metrics were done on a per patch basis, this may not be fully transferable to a whole slide image compression metric, further research would have to be done to confirm this.
 
 \paragraph{Future work} Future research could focus on merging of the data with VAEs and other techniques, for example, normalizing flows and manifolds. \\
 If the compression of VAEs could compete with existing methods, the compression would allow for the compressed representation to contain meaning within the latent features, possibly allowing for abstraction of clinically relevant features for clinicians to use for faster analysis of the biopsy tissue contained on the slide. \\
 Future research aims to compare the compression error type to subjective image quality and performance metrics. \\
 
+% Competing interests
 \section{Compliance with Ethical Standards}
 This work was performed as part of ethical approval given within the NPIC NHS ethical approval REC 05/Q1205/220.
 
+% Authors' contributions
 \section{Compliance with EPSRC open access requirements}
 In compliance with the UKRI and EPSRC open access requirements, all publishable material and code has been made available. The internal validation dataset contains patient data and so cannot be made publicly available. The code and data used for the experimentation can be found at \url{www.github.com/Jjk422/Journal-of-Pathology-Informatics-compression-paper-2022}.
 
+% Acknowledgements
 \section{Acknowledgements}
 JK is funded via the Leeds University Centre for Doctoral Training (CDT) for AI in medical diagnosis and care with a grant from EPSRC (Project no. 2271095). \\
 DT and AW are funded by National Pathology Imaging Co-operative, NPIC (Project no. 104687), supported by a £50m investment from the Data to Early Diagnosis and Precision Medicine strand of the government’s Industrial Strategy Challenge Fund, managed and delivered by UK Research and Innovation (UKRI).
 
+% References
 \section{References}
 
 
@@ -393,5 +401,48 @@ DT and AW are funded by National Pathology Imaging Co-operative, NPIC (Project n
 \nocite{*}
 
 \bibliography{references.bib}
+
+% Figure legends (if any)
+% \section{Figure legend}
+
+
+% Tables and captions (if any)
+\section{Tables and captions}
+\begin{table}[]
+    \centering
+    \begin{tabular}{p{0.15\linewidth} p{0.1\linewidth} p{0.1\linewidth} p{0.25\linewidth} p{0.24\linewidth}}
+    \toprule
+    \textbf{Algorithm} & \textbf{Has meta data} & \textbf{Test dataset} & \textbf{Peak signal to noise ratio (\gls{psnr})} & \textbf{Structural Similarity (\gls{ssim})} \\
+    \bottomrule
+    % & jpeg; meta\\
+    % \midrule
+    jpeg & Yes & Cam16 sub & 28 & 0.35 \\
+    & & UCLA & 28.75 & 0.35 \\
+    \bottomrule
+    
+    % & jpeg; no-meta & \\
+    % \midrule
+    jpeg & No & Cam16 sub & 30.03±1.34 (29.8867, 30.1733) & 0.88±0.025 (0.8773, 0.8827) \\
+    & & UCLA & 32.20±0.89 (31.9687, 32.4313) & 0.87±0.018 (0.8653, 0.8747) \\
+    & & Internal set & 30.24±1.31 (30.1816, 30.2984) & 0.84±0.038 (0.8383, 0.8417) \\
+    \bottomrule
+    
+    % & j2000; no-meta & \\
+    % \begin{tabular}{l l l}
+    % \midrule
+    jpeg 2000 & No & Cam16 sub & 70.55±4.078 (70.1140, 70.9860) & 0.82±0.082 (0.8112, 0.8288) \\
+    & & UCLA & 80.04±2.09 (79.4969, 80.5831) & 0.95±0.015 (0.9461, 0.9539) \\
+    & & Internal set & 72.86±3.078 (72.7229, 72.9971) & 0.84±0.064 (0.8371, 0.8429) \\
+    \bottomrule
+    % \caption{jpeg/jpeg 2000 (CR: $\sim$19) metrics}
+    \end{tabular}
+    \caption{jpeg/jpeg 2000 (Compression ratio: $\sim$19.2) metrics. Mean±Standard deviation (t-test: 95\% confidence interval)}
+    \label{tab:my_label}
+\end{table}
+
+% Description of additional data files (if any)
+\section{Additional data files}
+\paragraph{Code availability} Code can be found at \url{www.github.com/Jjk422/Journal-of-Pathology-Informatics-compression-paper-2022}.
+\paragraph{Data availability} Data for the Camelyon 2016 dataset can be found at \url{https://camelyon16.grand-challenge.org/}, \gls{ucla} data can be found at \url{https://bioimage.ucsb.edu/research/bio-segmentation}. The internal validation set contains patient data and so cannot be publicly shared.
 
 \end{document}
