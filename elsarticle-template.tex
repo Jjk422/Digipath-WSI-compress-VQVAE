@@ -351,8 +351,8 @@ A full hyperparameter search for the \gls{vqvae} network was not performed to ga
 More \gls{wsi} slides could have been used for training and testing of the data, using multiple datasets should mitigate the generalisability of this issue. As the metrics were done on a per patch basis, this may not be fully transferable to a whole slide image compression metric, further research would have to be done to confirm this.
 
 \paragraph{Future work} Future research could focus on merging of the data with \glspl{vae} and other techniques, for example, normalizing flows and manifolds. \\
-If the compression of \glspl{vae} could compete with existing methods, the compression would allow for the compressed representation to contain meaning within the latent features, possibly allowing for abstraction of clinically relevant features for clinicians to use for faster analysis of the biopsy tissue contained on the slide. \\
-Future research aims to compare the compression error type to subjective image quality and performance metrics. \\
+If the compression of \glspl{vae} could compete with existing methods, the compression would allow for the compressed representation to contain meaning within the latent features, possibly allowing for abstraction of clinically relevant features for faster analysis of the biopsy tissue contained on the slide. \\
+Future research aims to compare the compression error type to subjective image quality and performance metrics, as well looking at the application of the network on uncompressed data. \\
 
 % Competing interests
 \section{Compliance with Ethical Standards}
@@ -448,8 +448,7 @@ DT and AW are funded by National Pathology Imaging Co-operative, NPIC (Project n
 
 % Description of additional data files (if any)
 \section{Additional data files}
-\paragraph{Code availability} Code can be found at  \\
-\url{www.github.com/Jjk422/Journal-of-Pathology-Informatics-compression-paper-2022}.
+\paragraph{Code availability} Code can be found at \url{https://github.com/Jjk422/Digipath-WSI-compress-VQVAE}.
 \paragraph{Data availability} Data for the Camelyon 2016 dataset can be found at \url{https://camelyon16.grand-challenge.org/}, \gls{ucla} data can be found at \url{https://bioimage.ucsb.edu/research/bio-segmentation}. The internal validation set contains patient data and so cannot be publicly shared.
 
 \end{document}
